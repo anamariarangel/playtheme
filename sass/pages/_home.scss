@@ -1,0 +1,20 @@
+.section-header{
+    display: flex;
+    position: relative;
+    width: 100vw;
+    height: 85vh; 
+    }
+
+.section-slider{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    padding-left: 14rem;
+    padding-top: 10rem; 
+    
+        
+    @include respond(phone){
+        padding-left: 4rem;
+       
+    }
+}
