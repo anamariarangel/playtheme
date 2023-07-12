@@ -1,7 +1,7 @@
 <div class="slider-single slider-single-film">
 
- <i class="fas fa-chevron-left btn-arrow btn-arrow--left left-film"></i>
- <i class="fas fa-chevron-right btn-arrow btn-arrow--right right-film"></i>  
+ <i class="fas fa-chevron-left btn-arrow btn-arrow--left left-film control" aria-label="Previous image"></i>
+ <i class="fas fa-chevron-right btn-arrow btn-arrow--right right-film control"></i>  
             
         <div class="slider-single__wrapper"> 
           <div class="slider-single__article-film">            
@@ -10,7 +10,7 @@
               $filmes = new WP_Query($argument);
               if ( $filmes -> have_posts() ) : while ($filmes -> have_posts() ) : $filmes -> the_post();
                 //ARTICLE ?>
-                <div class="article-slider item-film current-item-film">
+                <div class="article-slider">
             <div class="article-slider__inner">  
             <article class="article " >
                   <div class="article-slider__thumb ">

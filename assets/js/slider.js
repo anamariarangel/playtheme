@@ -1,155 +1,76 @@
-//carousel films
+const sliderFilm = document.querySelector('.slider-single__article-film')
+const sliderDocs = document.querySelector('.slider-single__article-docs')
+const sliderSeries = document.querySelector('.slider-single__article-series')
+const buttonArrow = document.querySelector(".control")
+const isLeft = document.querySelectorAll(".btn-arrow--left")
+const isRight = document.querySelectorAll(".btn-arrow--right")
 
-let currentItemFilm = 0;
-const itemsFilm = document.querySelectorAll(".item-film");
-const maxItemsFilm = itemsFilm.length;
+const articleItem = document.querySelector('.article-slider')
 
-function changeClassFilm () {
-   itemsFilm.forEach((itemFilm) => itemFilm.classList.remove("current-item-film"));
-   
-    itemsFilm[currentItemFilm].scrollIntoView({
-    behavior: "smooth",
-    inline: "center",
-    block: "nearest"
+isLeft.forEach(function(element) {
+  element.addEventListener("click", function() {
+    let slider;
+  
+    if (element.classList.contains('left-film')) {
+      slider = sliderFilm;
+    } else if (element.classList.contains('left-docs')) {
+      slider = sliderDocs;
+    } else if (element.classList.contains('left-series')) {
+      slider = sliderSeries;
+    }
+  
+    const sliderItems = slider.children;
+  
+    let moveElement = sliderItems[0];
+    let cloneElement = moveElement.cloneNode(true);
+    let parentElement = moveElement.parentNode;
+  
+    cloneElement.style.opacity = 0;
+    cloneElement.style.pointerEvents = 'none';
+  
+    parentElement.appendChild(cloneElement);
+  
+    requestAnimationFrame(() => {
+      cloneElement.style.transform = 'translateX(100%)';
+  
+      setTimeout(() => {
+        parentElement.removeChild(cloneElement);
+        parentElement.appendChild(moveElement);
+      }, 400);
+    });
+  });
 });
 
-    itemsFilm[currentItemFilm].classList.add("current-item-film");
-}
-
-function decreaseFilm (){
-if (currentItemFilm <=0){
-  currentItemFilm = maxItemsFilm;
-}
-currentItemFilm --;   
-console.log(currentItemFilm); 
-
-changeClassFilm();
-
-return;
-
-
-}
-
-function increaseFilm (){
+isRight.forEach(function(element) {
+  element.addEventListener("click", function() {
+    let slider;
   
-  if (currentItemFilm >= maxItemsFilm){
-  currentItemFilm = 0;
-  }
- 
-  currentItemFilm ++;   
- 
-    changeClassFilm(); 
+    if (element.classList.contains('right-film')) {
+      slider = sliderFilm;
+    } else if (element.classList.contains('right-docs')) {
+      slider = sliderDocs;
+    } else if (element.classList.contains('right-series')) {
+      slider = sliderSeries;
+    }
   
-  console.log(currentItemFilm);
+    const sliderItems = slider.children;
   
-  }
-
-  if(document.querySelector(".left-film")){
-  clickLeft = document.querySelector(".left-film").addEventListener("click", (e) => {decreaseFilm();});
-  clickRight = document.querySelector(".right-film").addEventListener("click", (e) => {increaseFilm();});
-  }
-
+    let moveElement = sliderItems[sliderItems.length - 1];
+    let cloneElement = moveElement.cloneNode(true);
+    let parentElement = moveElement.parentNode;
   
-
-//carousel series
-
-let currentItemSeries = 0;
-const itemsSeries = document.querySelectorAll(".item-series");
-const maxItemsSeries = itemsSeries.length;
-
-function changeClassSeries () {
-   itemsSeries.forEach((itemSeries) => itemSeries.classList.remove("current-item-series"));
-   
-    itemsSeries[currentItemSeries].scrollIntoView({
-    behavior: "smooth",
-    inline: "center",
-    block: "nearest"
+    cloneElement.style.opacity = 0;
+    cloneElement.style.pointerEvents = 'none';
+  
+    parentElement.insertBefore(cloneElement, parentElement.firstChild);
+  
+    requestAnimationFrame(() => {
+      cloneElement.style.transform = 'translateX(-100%)';
+  
+      setTimeout(() => {
+        parentElement.removeChild(cloneElement);
+        parentElement.insertBefore(moveElement, parentElement.firstChild);
+      }, 100);
+    });
+  });
 });
-
-    itemsSeries[currentItemSeries].classList.add("current-item-series");
-}
-
-function decreaseSeries (){
-if (currentItemSeries <=0){
-  currentItemSeries = maxItemsSeries;
-}
-currentItemSeries --;   
-console.log(currentItemSeries); 
-
-changeClassSeries();
-
-
-}
-
-function increaseSeries (){
-  
-  if (currentItemSeries >= maxItemsSeries){
-  currentItemSeries = 0;
-  }
- 
-  currentItemSeries ++;   
- 
-    changeClassSeries(); 
-  
-  console.log(currentItemSeries);
-  
-  }
-  if(document.querySelector(".left-series")){
-  clickLeft = document.querySelector(".left-series").addEventListener("click", (e) => {decreaseSeries();});
-  clickRight = document.querySelector(".right-series").addEventListener("click", (e) => {increaseSeries();});
-  }
-
- 
-  //carousel documentários
-
-  let currentItemDocs = 0;
-const itemsDocs = document.querySelectorAll(".item-docs");
-const maxItemsDocs = itemsDocs.length;
-
-function changeClassDocs () {
-  itemsDocs.forEach((itemDocs) => itemDocs.classList.remove("current-item-docs"));
-  
-   itemsDocs[currentItemDocs].scrollIntoView({
-   behavior: "smooth",
-   inline: "center",
-   block: "nearest"
-});
-
-   itemsDocs[currentItemDocs].classList.add("current-item-docs");
-}
-
-
-function decreaseDocs (){
-if (currentItemDocs <=0){
-  currentItemDocs = maxItemsDocs;
-}
-currentItemDocs --;   
-console.log(currentItemDocs); 
-
-changeClassDocs();
-
-
-}
-
-function increaseDocs (){
-  
-  if (currentItemDocs >= maxItemsDocs){
-  currentItemDocs = 0;
-  }
- 
-  currentItemDocs ++;   
- 
-    changeClassDocs(); 
-  
-  console.log(currentItemDocs);
-  
-  }
-  if(document.querySelector(".left-docs")){
-  clickLeft = document.querySelector(".left-docs").addEventListener("click", (e) => {decreaseDocs();});
-  clickRight = document.querySelector(".right-docs").addEventListener("click", (e) => {increaseDocs();});
-  }
-
-
-
-
-  
